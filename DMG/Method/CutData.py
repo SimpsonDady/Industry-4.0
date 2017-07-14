@@ -3,6 +3,7 @@ from os import name
 
 class CutData:
     def __init__(self, fn):
+        self.machine_name = ''
         self.date = []                  # list of {'year', 'month', 'date'}
         self.time = []                  # list of {'hour', 'minute', 'second'}
         self.code = []                  # list of main program code
@@ -17,7 +18,9 @@ class CutData:
                     title = False
                     continue
                 cut = line.split('\t')                   # Split Line
-                # Section2 time
+                # Section 1 Machine Name
+                self.machine_name = cut[0]
+                # Section 2 time
                 writetime = cut[1].split(' ')            # split load time
                 cutdate = writetime[0].split('-')        # split date
                 cuttime = writetime[1].split(':')        # split time

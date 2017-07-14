@@ -1,4 +1,4 @@
-from Method.Data import Data
+from DMG.Method.Data import Data
 
 
 class Format:
