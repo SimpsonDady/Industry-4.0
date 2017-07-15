@@ -13,16 +13,11 @@ class CreateDMG:
         self.execute_spend = None
         self.plan_spend = None
 
-        # self.status_daily = None
-        # self.execute_daily = None
-        # self.plan_daily = None
-
         self.y_high = None
         self.y_tick = None
 
         self.cut(execute_file, plan_file)
         self.format()
-        # self.daily()
         
     def cut(self, execute_file, plan_file):
         print('Data Cutting...')
@@ -40,13 +35,3 @@ class CreateDMG:
                                             self.plan_cut.start_date, self.plan_cut.start_time,
                                             self.plan_cut.end_date, self.plan_cut.end_time)
         print('done')
-
-    # def daily(self):
-    #     print('Translating to daily form...')
-    #     final = Daily(self.status_spend, self.execute_spend, self.plan_spend)
-    #     self.status_daily = final.status
-    #     self.execute_daily = final.execute
-    #     self.plan_daily = final.plan
-    #     self.y_high = final.y_high
-    #     self.y_tick = final.y_tick
-    #     print('done')
