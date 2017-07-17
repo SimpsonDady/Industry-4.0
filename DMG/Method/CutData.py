@@ -19,8 +19,13 @@ class CutData:
                     continue
                 cut = line.split('\t')                   # Split Line
                 # Section 1 Machine Name
-                self.machine_name = cut[0]
-                # Section 2 time
+                if cut[0] == '9703':
+                    self.machine_name = 'DMG01'
+                elif cut[0] == '9702':
+                    self.machine_name = 'DMG02'
+                else:
+                    self.machine_name = ''
+                    # Section 2 time
                 writetime = cut[1].split(' ')            # split load time
                 cutdate = writetime[0].split('-')        # split date
                 cuttime = writetime[1].split(':')        # split time

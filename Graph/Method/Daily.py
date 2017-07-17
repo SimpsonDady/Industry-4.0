@@ -56,7 +56,7 @@ class Daily:
                                        int(machine.execute_spend[day].getEndSecond(j)+0.5)):
                             perday[k] = list[machine.execute_spend[day].getProgramCode(j)]
                 # print(color)
-                self.graph[search].add_line(perday, color[-1], '-', 0.5, label_name + 'Execute')
+                self.graph[search].add_line(perday, color[-1], '--', 1, label_name + 'Execute')
                 # ****plan section****
                 # self.graph[search].add_tick('')
                 perday = []                 # initialize perday
@@ -75,6 +75,6 @@ class Daily:
                             for l in range(int(machine.plan_spend[k].getStartSecond(j) + 0.5),
                                            int(machine.plan_spend[k].getEndSecond(j) + 0.5)):
                                 perday[l] = list[machine.plan_spend[k].getProgramCode(j)]
-                self.graph[search].add_line(perday, color[-1], '-', 1.5, label_name + 'Expect')
+                self.graph[search].add_line(perday, color[-1], '-', 1, label_name + 'Expect')
                 self.graph[search].add_tick('')
             color.pop()
