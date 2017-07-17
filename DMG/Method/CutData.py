@@ -7,6 +7,8 @@ class CutData:
         self.date = []                  # list of {'year', 'month', 'date'}
         self.time = []                  # list of {'hour', 'minute', 'second'}
         self.code = []                  # list of main program code
+        self.component = []
+        self.version = []
         self.work = []
         self.split(fn.format(name))     # transform filename to name type ( str.format(name) )
 
@@ -19,13 +21,8 @@ class CutData:
                     continue
                 cut = line.split('\t')                   # Split Line
                 # Section 1 Machine Name
-                if cut[0] == '9703':
-                    self.machine_name = 'DMG01'
-                elif cut[0] == '9702':
-                    self.machine_name = 'DMG02'
-                else:
-                    self.machine_name = ''
-                    # Section 2 time
+                self.machine_name = cut[0]
+                # Section 2 time
                 writetime = cut[1].split(' ')            # split load time
                 cutdate = writetime[0].split('-')        # split date
                 cuttime = writetime[1].split(':')        # split time
@@ -33,8 +30,17 @@ class CutData:
                 self.date.append({"year": int(cutdate[0]), "month": int(cutdate[1]), "date": int(cutdate[2])})
                 # Section 3 code
                 part = cut[2].split('\\')
-                code = part[-1].split('_')      # Split main program code
-                self.code.append(code[0])       # Save main program code
+                if len(part) > 2:
+                    code = part[-1].split('_')  # Split main program code
+                    self.code.append(code[0])
+                    self.version.append(code[1])
+                    part.pop()
+                    self.component.append(part[-1].split('(')[0])  # 零件
+                else:
+                    code = part[-1].split('_')  # Split main program code
+                    self.code.append(code[0])  # Save main program code
+                    self.version.append('')
+                    self.component.append('')
                 # Section 6 work status         # Split word status
                 if cut[6] == "START":
                     self.work.append(1)

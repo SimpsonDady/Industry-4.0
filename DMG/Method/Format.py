@@ -7,7 +7,7 @@ class Format:
         self.time = time
     # Python has no override, thus we use default input to comply that
 
-    def build(self, inputs, start_date=None, start_time=None, end_date=None, end_time=None):
+    def build(self, inputs, component='', version='', start_date=None, start_time=None, end_date=None, end_time=None):
         # Only input one variable (For workSpend and programSpend)
         if start_date is None and start_time is None and end_date is None and end_time is None:
             outputs = []                    # To save the result of formatted data
@@ -32,6 +32,8 @@ class Format:
                     pro = inputs[i]
                     outputs[-1].addProgram(pro)
                     outputs[-1].setEnd(-1, self.time[i]['hour'], self.time[i]['minute'], self.time[i]['second'])
+                if component != '' and version != '':
+                    outputs[-1].setInformation(-1, component[i], version[i])
             outputs[-1].setStart(-1, self.time[-1]['hour'], self.time[-1]['minute'], self.time[-1]['second'])
             return outputs
         # input all of the variables (For workSpend)

@@ -2,6 +2,8 @@
 class Program:
     def __init__(self, p):
         self.__code = p
+        self.component = ''
+        self.version = ''
         self.__start = {'hour': -1, 'minute': -1, 'second': -1}
         self.__end = {'hour': -1, 'minute': -1, 'second': -1}
         self.__startTime = ''
@@ -23,6 +25,10 @@ class Program:
         self.__endSecond = (h*60 + m)*60 + s
         self.__endTime = str(h) + ':' + str(m) + ':' + str(s)
 
+    def setInformation(self, component, version):
+        self.component = component
+        self.version = version
+
     def getProgramCode(self):
         return self.__code
 
@@ -43,6 +49,12 @@ class Program:
 
     def getEndSecond(self):
         return self.__endSecond
+
+    def getComponent(self):
+        return self.component
+
+    def getVersion(self):
+        return self.version
 
 
 class Data:
@@ -74,6 +86,9 @@ class Data:
     def setEnd(self, index, hour, minute, second):
         self.__program[index].setEnd(hour, minute, second)
 
+    def setInformation(self, index, component, version):
+        self.__program[index].setInformation(component, version)
+
     def getProgramCode(self, index):
         return self.__program[index].getProgramCode()
 
@@ -92,9 +107,17 @@ class Data:
     def getProgramLength(self):
         return len(self.__program)
 
+    def getComponent(self, index):
+        return self.__program[index].getComponent()
+
+    def getVersion(self, index):
+        return self.__program[index].getVersion()
+
     def printAll(self):
         print(self.__day)
         for program in self.__program:
             print(program.getProgramCode())
             print(program.getStartTime())
             print(program.getEndTime())
+            print(program.getComponent())
+            print(program.getVersion())
