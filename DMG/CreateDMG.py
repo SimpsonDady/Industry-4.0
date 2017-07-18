@@ -1,6 +1,7 @@
 from DMG.Method.CutData import CutData
 from DMG.Method.CutWorkList import Cutworklist
 from DMG.Method.Format import Format
+from DMG.Method.Information import timemode
 
 
 class CreateDMG:
@@ -18,6 +19,7 @@ class CreateDMG:
 
         self.cut(execute_file, plan_file)
         self.format()
+        self.timemode()
         
     def cut(self, execute_file, plan_file):
         print('Data Cutting...')
@@ -40,6 +42,9 @@ class CreateDMG:
         self.plan_spend = format_data.build(self.plan_cut.code, None, None,
                                             self.plan_cut.start_date, self.plan_cut.start_time,
                                             self.plan_cut.end_date, self.plan_cut.end_time)
-        for i in self.execute_spend:
-            i.printAll()
+        #for i in self.execute_spend:
+            #i.printAll()
         print('done')
+
+    def timemode(self):
+        time_mode = timemode(self.machine_name, self.execute_spend)

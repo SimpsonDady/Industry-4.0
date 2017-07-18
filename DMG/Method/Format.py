@@ -33,7 +33,8 @@ class Format:
                     outputs[-1].addProgram(pro)
                     outputs[-1].setEnd(-1, self.time[i]['hour'], self.time[i]['minute'], self.time[i]['second'])
                 if component != '' and version != '':
-                    outputs[-1].setInformation(-1, component[i], version[i])
+                    if component[i] != '' and version[i] != '':
+                        outputs[-1].setInformation(-1, component[i], version[i])
             outputs[-1].setStart(-1, self.time[-1]['hour'], self.time[-1]['minute'], self.time[-1]['second'])
             return outputs
         # input all of the variables (For workSpend)

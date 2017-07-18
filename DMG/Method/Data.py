@@ -86,6 +86,12 @@ class Data:
     def setEnd(self, index, hour, minute, second):
         self.__program[index].setEnd(hour, minute, second)
 
+    def getStartTime(self, index):
+        return self.__program[index].getStartTime()
+
+    def getEndTime(self, index):
+        return self.__program[index].getEndTime()
+
     def setInformation(self, index, component, version):
         self.__program[index].setInformation(component, version)
 
