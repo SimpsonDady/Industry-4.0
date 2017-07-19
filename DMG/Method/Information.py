@@ -2,12 +2,12 @@ from openpyxl import Workbook, load_workbook
 
 
 class timemode:
-    def __init__(self, machine_name, inputdata):
+    def __init__(self, plan_file, machine_name, inputdata):
         self.machine_name = machine_name
         self.inputdata = inputdata
         self.ws = Workbook()
         self.wb = self.ws.active
-        self.open = load_workbook('DMG01_0703-0707.xlsx')
+        self.open = load_workbook(plan_file)
         self.xlsx = self.open['Sheet1']
         self.output()
 
@@ -62,7 +62,6 @@ class timemode:
                     for k in range(2, self.xlsx.max_row):
                         if self.xlsx['G' + str(k)].value == i.getComponent(j) and self.xlsx[
                                     'M' + str(k)].value == i.getProgramCode(j):
-                            print(21354)
                             worknum = self.xlsx['B' + str(k)].value
                             NC = self.xlsx['J' + str(k)].value
                             workcenter = self.xlsx['D' + str(k)].value

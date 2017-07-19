@@ -6,6 +6,7 @@ from DMG.Method.Information import timemode
 
 class CreateDMG:
     def __init__(self, execute_file, plan_file):
+        self.plan_file = plan_file
         self.execute_cut = None
         self.plan_cut = None
         self.machine_name = ''
@@ -42,9 +43,7 @@ class CreateDMG:
         self.plan_spend = format_data.build(self.plan_cut.code, None, None,
                                             self.plan_cut.start_date, self.plan_cut.start_time,
                                             self.plan_cut.end_date, self.plan_cut.end_time)
-        #for i in self.execute_spend:
-            #i.printAll()
         print('done')
 
     def timemode(self):
-        time_mode = timemode(self.machine_name, self.execute_spend)
+        time_mode = timemode(self.plan_file, self.machine_name, self.execute_spend)
