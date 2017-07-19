@@ -1,7 +1,7 @@
 from DMG.Method.CutData import CutData
 from DMG.Method.CutWorkList import Cutworklist
 from DMG.Method.Format import Format
-from DMG.Method.Information import timemode
+from DMG.Method.Timesmode import Timesmode
 
 
 class CreateDMG:
@@ -15,8 +15,7 @@ class CreateDMG:
         self.execute_spend = None
         self.plan_spend = None
 
-        self.y_high = None
-        self.y_tick = None
+        self.time_mode = None
 
         self.cut(execute_file, plan_file)
         self.format()
@@ -46,4 +45,4 @@ class CreateDMG:
         print('done')
 
     def timemode(self):
-        time_mode = timemode(self.plan_file, self.machine_name, self.execute_spend)
+        self.time_mode = Timesmode(self.plan_file, self.machine_name, self.execute_spend)
