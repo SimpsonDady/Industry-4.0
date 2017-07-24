@@ -25,7 +25,7 @@ class Graph:
                 plt.plot([x0, x0, ], [0, day.gethight(), ], 'k-', linewidth=0.2)
                 x0 = x0+3600
             # save the graph with the name of it's day and set the dpi of the graph
-            plt.savefig('C:\\Users\\User\\Desktop\\result\\graph\\' + day.getday(), dpi=180)
+            plt.savefig('D:\\result\\graph\\' + day.getday(), dpi=180)
             print(day.getday() + '.png')
             plt.close('all')
         print('done')

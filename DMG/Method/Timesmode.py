@@ -22,7 +22,7 @@ class Timesmode:
         totaltime = 0
         for i in range(len(self.inputdata)):
             for j in range(self.inputdata[i].getProgramLength()):
-                if self.inputdata[i].getProgramCode(j) == 'TOOL-SL-D':
+                if self.inputdata[i].getProgramCode(j) == 'TOOL-SL-D.I':
                     continue
                 elif self.inputdata[i].getProgramCode(j) == 'WARM':
                     warm = 2
@@ -45,7 +45,7 @@ class Timesmode:
                     enddate = i
                     endcode = j
         self.save(startdate, startcode, enddate, endcode)
-        self.ws.save('C:\\Users\\User\\Desktop\\result\\time_model\\' + self.machine_name + '_TimeModel.xlsx')
+        self.ws.save('D:\\result\\time_model\\' + self.machine_name + '_TimeModel.xlsx')
 
     def save(self, startdate, startcode, enddate, endcode):
         worknum = 'N/A'
@@ -53,15 +53,13 @@ class Timesmode:
         workcenter = 'N/A'
         component = 'N/A'
         for i in range(2, self.xlsx.max_row):
-            if self.xlsx['G' + str(i)].value == self.inputdata[startdate].getComponent(startcode) \
-                    and self.xlsx['M' + str(i)].value == self.inputdata[startdate].getProgramCode(startcode):
+            if self.xlsx['M' + str(i)].value == self.inputdata[startdate].getProgramCode(startcode):
                 worknum = self.xlsx['B' + str(i)].value
                 NC = self.xlsx['J' + str(i)].value
                 workcenter = self.xlsx['D' + str(i)].value
                 component = self.xlsx['G' + str(i)].value
         time = (self.inputdata[enddate].getEndSecond(endcode)-self.inputdata[startdate].getStartSecond(startcode))/3600
-        if time < 0:
-            time += 86400
+        time += (self.inputdata[enddate].getDate() - self.inputdata[startdate].getDate()) * 24
         self.wb.append([self.inputdata[startdate].getProgramCode(startcode), component, worknum, NC,
                         self.inputdata[startdate].getVersion(startcode), workcenter, self.machine_name,
                         self.inputdata[startdate].getDay(), self.inputdata[startdate].getStartTime(startcode),
