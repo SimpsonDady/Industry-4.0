@@ -1,4 +1,5 @@
 from Graph.Method.Daily import Daily
+
 from Graph.Method.Graph import Graph
 
 
