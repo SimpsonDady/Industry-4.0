@@ -1,9 +1,11 @@
-
 class Program:
     def __init__(self, p):
         self.__code = p
         self.component = ''
         self.version = ''
+        self.work_num = ''
+        self.nc = ''
+        self.center = ''
         self.__start = {'hour': -1, 'minute': -1, 'second': -1}
         self.__end = {'hour': -1, 'minute': -1, 'second': -1}
         self.__startTime = ''
@@ -15,19 +17,22 @@ class Program:
         self.__start['hour'] = h
         self.__start['minute'] = m
         self.__start['second'] = s
-        self.__startSecond = (h*60 + m)*60 + s
+        self.__startSecond = (h * 60 + m) * 60 + s
         self.__startTime = str(h) + ':' + str(m) + ':' + str(s)
 
     def setEnd(self, h, m, s):
         self.__end['hour'] = h
         self.__end['minute'] = m
         self.__end['second'] = s
-        self.__endSecond = (h*60 + m)*60 + s
+        self.__endSecond = (h * 60 + m) * 60 + s
         self.__endTime = str(h) + ':' + str(m) + ':' + str(s)
 
-    def setInformation(self, component, version):
+    def setInformation(self, component, version, work_num, nc, center):
         self.component = component
         self.version = version
+        self.work_num = work_num
+        self.nc = nc
+        self.center = center
 
     def getProgramCode(self):
         return self.__code
@@ -55,6 +60,15 @@ class Program:
 
     def getVersion(self):
         return self.version
+
+    def getWorknum(self):
+        return self.work_num
+
+    def getNc(self):
+        return self.nc
+
+    def getCenter(self):
+        return self.center
 
 
 class Data:
@@ -92,8 +106,8 @@ class Data:
     def getEndTime(self, index):
         return self.__program[index].getEndTime()
 
-    def setInformation(self, index, component, version):
-        self.__program[index].setInformation(component, version)
+    def setInformation(self, index, component, version, work_num, nc, center):
+        self.__program[index].setInformation(component, version, work_num, nc, center)
 
     def getProgramCode(self, index):
         return self.__program[index].getProgramCode()
@@ -118,6 +132,15 @@ class Data:
 
     def getVersion(self, index):
         return self.__program[index].getVersion()
+
+    def getWorknum(self, index):
+        return self.__program[index].getWorknum()
+
+    def getNc(self, index):
+        return self.__program[index].getNc()
+
+    def getCenter(self, index):
+        return self.__program[index].getCenter()
 
     def printAll(self):
         print(self.__day)

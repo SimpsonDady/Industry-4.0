@@ -56,7 +56,7 @@ class Daily:
                         check = code.replace('B', '2')
                         confirm = check.isdigit()
                         # print(confirm)
-                    elif code.startswith('A',0):
+                    elif code.startswith('A', 0):
                         check = code.replace('A', '1')
                         confirm = check.isdigit()
                     else:

@@ -2,11 +2,16 @@ from Format.DataStructure import Data
 
 
 class WorkList:
-    def __init__(self, start_date, start_time, end_date, end_time):
+    def __init__(self, start_date, start_time, end_date, end_time, version, component, work_num, nc, center):
         self.start_date = start_date
         self.start_time = start_time
         self.end_date = end_date
         self.end_time = end_time
+        self.version = version
+        self.component = component
+        self.work_num = work_num
+        self.nc = nc
+        self.center = center
 
     def build(self, inputs):
         outputs = []
@@ -14,12 +19,15 @@ class WorkList:
         # handle first data before go into loop
         outputs.append(Data(self.start_date[0]['year'], self.start_date[0]['month'], self.start_date[0]['date']))
         outputs[0].addProgram(inputs[0])
+        outputs[0].setInformation(0, self.component[0], self.version[0], self.work_num[0], self.nc[0], self.center[0])
         outputs[0].setStart(0, self.start_time[0]['hour'], self.start_time[0]['minute'], self.start_time[0]['second'])
         if date != self.end_date[0]:
             date = self.end_date[0]
             outputs[0].setEnd(0, 23, 59, 59)
             outputs.append(Data(self.end_date[0]['year'], self.end_date[0]['month'], self.end_date[0]['date']))
             outputs[0].addProgram(inputs[0])
+            outputs[0].setInformation(0, self.component[0], self.version[0], self.work_num[0], self.nc[0],
+                                      self.center[0])
             outputs[0].setStart(1, 0, 0, 0)
             outputs[0].setEnd(1, self.end_time[0]['hour'], self.end_time[0]['minute'], self.end_time[0]['second'])
         else:
@@ -32,6 +40,8 @@ class WorkList:
                 date = self.start_date[day]
             # Save the code and start time
             outputs[-1].addProgram(inputs[day])
+            outputs[-1].setInformation(-1, self.component[day], self.version[day], self.work_num[day], self.nc[day],
+                                      self.center[day])
             outputs[-1].setStart(-1, self.start_time[day]['hour'],
                                  self.start_time[day]['minute'], self.start_time[day]['second'])
             # if end date is not equals to start date, than let 23:59:59 be the end time,
@@ -43,6 +53,8 @@ class WorkList:
                 outputs.append(Data(self.end_date[day]['year'],
                                     self.end_date[day]['month'], self.end_date[day]['date']))
                 outputs[-1].addProgram(inputs[day])
+                outputs[-1].setInformation(-1, self.component[day], self.version[day], self.work_num[day], self.nc[day],
+                                          self.center[day])
                 outputs[-1].setStart(-1, 0, 0, 0)
                 outputs[-1].setEnd(-1, self.end_time[day]['hour'],
                                    self.end_time[day]['minute'], self.end_time[day]['second'])

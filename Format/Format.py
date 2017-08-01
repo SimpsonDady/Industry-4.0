@@ -27,7 +27,8 @@ class Format:
             self.execute_format.append(load.build(data.code))
             print('     Execute format: ' + data.machine_name)
         for data in self.plan_data:
-            plan = WorkList(data.start_date, data.start_time, data.end_date, data.end_time)
+            plan = WorkList(data.start_date, data.start_time, data.end_date, data.end_time, data.version,
+                            data.component, data.work_num, data.nc, data.center)
             self.plan_format.append(plan.build(data.code))
             print('     Plan format: ' + data.machine_name)
 
