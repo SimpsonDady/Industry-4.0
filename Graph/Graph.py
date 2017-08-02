@@ -9,3 +9,4 @@ class Graph:
         daily = Daily(machine_name, match, status_format, execute_format, plan_format)
         print(' ->Saving...')
         graph = Draw(daily.graph)
+        print()
