@@ -34,6 +34,8 @@ class LoadData:
                 self.code.append(code[0])
             else:
                 part = cut[2].split('_')
+                # print(self.date[-1], end=' ')
+                # print(self.time[-1])
                 self.code.append(part[2])
 
             # Split work status         # Split word status

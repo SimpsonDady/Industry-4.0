@@ -32,6 +32,7 @@ class Format:
             self.plan_format.append(plan.build(data.code))
             print('     Plan format: ' + data.machine_name)
 
-        for i in self.match:
-            if self.match[i] == -1:
-                print('     Missing Work List: ' + self.machine_name[i])
+        # print(self.match)
+        # for i in self.match:
+        #     if self.match[i] == -1:
+        #         print('     Missing Work List: ' + self.machine_name[i])

@@ -55,11 +55,11 @@ class Build:
         self.ws.save('D:\\result\\time_model\\' + self.machine_name + '_TimeModel.xlsx')
 
     def save(self, startdate, startcode, enddate, endcode):
-        worknumber = 'N/A'
-        NC = 'N/A'
-        workcenter = 'N/A'
-        component = 'N/A'
-        version = 'N/A'
+        worknumber = 0
+        NC = ''
+        workcenter = 0
+        component = ''
+        version = ''
         for day in range(len(self.plan_format)):
             for j in range(len(self.plan_format[day].program)):
                if self.plan_format[day].program[j].code == self.execute_format[enddate].program[endcode].code:
