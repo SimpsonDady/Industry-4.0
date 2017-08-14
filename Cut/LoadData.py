@@ -1,5 +1,3 @@
-import os
-
 
 class LoadData:
     def __init__(self, file):
