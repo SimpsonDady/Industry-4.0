@@ -3,7 +3,6 @@ from TimeModel.DataBase import DataBase
 
 
 class Timemodel:
-<<<<<<< HEAD
     def __init__(self, machine_name, match, execute_format, plan_format, status_format):
         print("****Build format into TimesModel****")
         for i in range(len(execute_format)):

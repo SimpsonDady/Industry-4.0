@@ -20,15 +20,9 @@ class WorkList:
                 data = str(xlsx.cell(row=line, column=section).value)  # read one data
                 if section == 1:
                     # self.machine_name = data
-<<<<<<< HEAD
-                    if data.startswith('DMG') and data.endswith('#1'):
-                        self.machine_name = 'DMG01'
-                    elif data.startswith('DMG') and data.endswith('#2'):
-=======
                     if data.startswith('DMG') and data.endswith('1'):
                         self.machine_name = 'DMG01'
                     elif data.startswith('DMG') and data.endswith('2'):
->>>>>>> 37ca301ddc92a270cc8386231c2171945a9ab1a4
                         self.machine_name = 'DMG02'
                     else:
                         self.machine_name = 'STC01'
