@@ -1,6 +1,6 @@
 class Data:
     def __init__(self, program, component, worknumber, NC, version, workcenter,
-                 machinename, startdate, starttime, enddate, endtime, spendtime):
+                 machinename, startdate, starttime, enddate, endtime, spendtime, shift):
         self.program = program
         self.component = component
         self.worknumber = worknumber
@@ -13,7 +13,8 @@ class Data:
         self.enddate = enddate
         self.endtime = endtime
         self.spendtime = spendtime
+        self.shift = shift
 
     def getlist(self):
         return [self.program, self.component, self.worknumber, self.nc, self.version, self.workcenter,
-                self.machinename, self.startdate, self.starttime, self.enddate, self.endtime, self.spendtime]
+                self.machinename, self.startdate, self.starttime, self.enddate, self.endtime, self.spendtime, self.shift]
