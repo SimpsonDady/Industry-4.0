@@ -18,7 +18,6 @@ class Build:
         self.prestartsecond = 0
 
     def output(self):
-        warm = 0
         startcode = 0
         startdate = 0
         endcode = 0
@@ -59,7 +58,7 @@ class Build:
 
     def save(self, startdate, startcode, enddate, endcode):
         worknumber = 0
-        NC = ''
+        Nc = ''
         workcenter = 0
         component = ''
         version = ''
@@ -67,7 +66,7 @@ class Build:
             for j in range(len(self.plan_format[day].program)):
                 if self.plan_format[day].program[j].code == self.execute_format[enddate].program[endcode].code:
                     worknumber = self.plan_format[day].program[j].worknumber
-                    NC = self.plan_format[day].program[j].nc
+                    Nc = self.plan_format[day].program[j].nc
                     workcenter = self.plan_format[day].program[j].center
                     component = self.plan_format[day].program[j].component
                     version = self.plan_format[day].program[j].version
@@ -86,36 +85,34 @@ class Build:
                 if i == self.status_format[date]:
                     for j in range(len(i.program)):
                         if i.program[j].startSecond >= startsecondcount and i.program[j].endSecond <= endsecond and \
-                                        i.program[j].code == 0:  #  include
+                                        i.program[j].code == 0:  # include
                             for k in range(int(i.program[j].startSecond + 0.5), int(i.program[j].endSecond + 0.5)):
                                 if k in range(10800, 13800) or k in range(43200, 46800) or k in range(64800, 66600):
                                     counttime += 1
-                        elif i.program[j].startSecond >= startsecondcount and i.program[j].code == 0: #  headinclude
+                        elif i.program[j].startSecond >= startsecondcount and i.program[j].code == 0:  # headinclude
                             if i.program[j].endSecond >= self.prestartsecond and self.predate == i.date:
                                 for k in range(int(i.program[j].startSecond + 0.5), int(i.program[j].endSecond + 0.5)):
                                     if k in range(10800, 13800) or k in range(43200, 46800) or k in range(64800, 66600):
                                         if k >= self.prestartsecond:
                                             continue
                                         counttime += 1
-                        elif i.program[j].endSecond <= endsecond and i.program[j].code == 0: #  tailinclude
+                        elif i.program[j].endSecond <= endsecond and i.program[j].code == 0:  # tailinclude
                             for k in range(int(startsecondcount + 0.5), int(i.program[j].endSecond + 0.5)):
                                 if k in range(10800, 13800) or k in range(43200, 46800) or k in range(64800, 66600):
                                     counttime += 1
-                        elif i.program[j].startSecond <= startsecondcount and i.program[j].endSecond >= endsecond and \
-                                        i.program[j].code == 0:  #  include
+                        elif i.program[j].startSecond <= startsecondcount and i.program[j].endSecond >= endsecond and i.program[j].code == 0:  # include
                             for k in range(int(startsecondcount + 0.5), int(endsecond + 0.5)):
                                 if k in range(10800, 13800) or k in range(43200, 46800) or k in range(64800, 66600):
                                     counttime += 1
                     self.predate = i.date
                     self.prestartsecond = self.execute_format[startdate].program[startcode].startSecond
             endsecond = 86400
-        print(counttime)
         time = (self.execute_format[enddate].program[endcode].endSecond
                 - self.execute_format[startdate].program[startcode].startSecond) / 3600
         time += ((self.execute_format[enddate].date - self.execute_format[startdate].date) * 24)
-        self.timemodel.append(Data(self.execute_format[enddate].program[endcode].code, component, worknumber, NC,
+        self.timemodel.append(Data(self.execute_format[enddate].program[endcode].code, component, worknumber, Nc,
                                    version, workcenter, self.machine_name, self.execute_format[startdate].day,
                                    self.execute_format[startdate].program[startcode].startTime,
                                    self.execute_format[enddate].day,
-                                   self.execute_format[enddate].program[endcode].endTime, time, counttime/3600))
+                                   self.execute_format[enddate].program[endcode].endTime, time, counttime / 3600))
         self.wb.append(self.timemodel[-1].getlist())
