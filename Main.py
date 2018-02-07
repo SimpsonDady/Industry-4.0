@@ -6,7 +6,7 @@ from Format.Format import Format
 from Graph.Graph import Graph
 from TimeModel.TimeModel import Timemodel
 
-DATA_DIR = "D:\\result\\src"
+DATA_DIR = "C:\\Users\\User\\Google 雲端硬碟\\畢業專題\\漢翔\\src"
 exe_file = []
 plan_file = []
 
