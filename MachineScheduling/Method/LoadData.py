@@ -30,7 +30,7 @@ class LoadData:
         tmpDetail = []
 
         # For Windows
-        f = open('D:/pythonScript/MachineScheduling/Data/MachinceData/data'+num+'.txt', 'r', encoding='UTF-8')
+        f = open('C:/Users/User/Google 雲端硬碟/畢業專題/漢翔/MachineScheduling/data'+num+'.txt', 'r', encoding='UTF-8')
 
         # For MAC
         # f = open('/Users/yurenchen/Desktop/MachineScheduling/Data/MachinceData/data' + num + '.txt', 'r', encoding='UTF-8')
