@@ -1,5 +1,5 @@
-from Graph.Daily import Daily
-from Graph.Draw import Draw
+from AnalysisData.Graph.Daily import Daily
+from AnalysisData.Graph.Draw import Draw
 
 
 class Graph:

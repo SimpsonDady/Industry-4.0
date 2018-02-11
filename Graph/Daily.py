@@ -1,4 +1,4 @@
-from Graph.DataStructure import Data
+from AnalysisData.Graph.DataStructure import Data
 
 
 class Daily:
