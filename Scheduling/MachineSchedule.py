@@ -1,5 +1,8 @@
+import copy
 from datetime import datetime
 import heapq
+
+import sys
 
 from Scheduling.OrderData import OrderData
 from Scheduling.Node import Node
@@ -8,23 +11,23 @@ from Scheduling.Node import Node
 class Main:
     def __init__(self):
         self.orderData = self.load_data()
+        self.sequence = 0  # For record the order that pushed into the heap
+        start = datetime.today()
+        print('Execute Start at: ', start)
+        heap = self.initial_heap()
+        self.skylineList = self.extend_heap(heap)
+        finish = datetime.today()  # Get Run time
 
-        now = datetime.today()
-        print('Start in ', now)
-
-        self.skylineList = self.heap()
-
-        end = datetime.today()  # Get Run time
-        print(len(self.skylineList))
         print('--------------SKYLINE-------------')
         for skyline in self.skylineList:
             skyline.print_path()
             skyline.print_element()
             print()
 
-        print(len(self.skylineList))
-        print('End in', end)
-        print('Spend time: ', end - now)
+        print('Length:', len(self.skylineList))
+        print('Start: ', start)
+        print('Finish:', finish)
+        print('Spend: ', finish - start)
 
     @staticmethod
     def load_data():
@@ -39,19 +42,23 @@ class Main:
         file.close()
         return order_data
 
-    def heap(self):
-        # Initial the Heap
+    def initial_heap(self):
         heap = []
-        sequence = 0  # For record the order that pushed into the heap
         for data in self.orderData:
             node = Node(data)
-            heapq.heappush(heap, (node.get_sum(), sequence, node))
-            sequence += 1
-            # Compare sequence when Sum are same (First In First Out)
+            heapq.heappush(heap, (node.get_sum(), self.sequence, copy.deepcopy(node)))
+            self.sequence += 1   # Compare sequence when Sum are same (First In First Out)
+        return heap
 
+    def extend_heap(self, heap):
         # Extend Heap
         skyline_list = []
         while heap:  # Keep Running when heap not empty
+
+            # for h in heap:
+            #     h[2].print_path()
+            # print('-----------------------')
+
             node = heapq.heappop(heap)[2]
             # Check if been dominated or not
             dominate = False
@@ -62,17 +69,32 @@ class Main:
                 # Check if it has been Leaf already or not
                 is_leaf = True
                 for data in self.orderData:
-                    if len(node.scheduledData) == 4:  # Limit how many nodes in each path
+                    if len(node.scheduledData) == 13:  # Limit how many nodes in each path
                         break
-                    new_node = node.copy()
+                    # node.print_path()
+                    new_node = copy.deepcopy(node)
                     if new_node.add_data(data):
-                        heapq.heappush(heap, (new_node.get_sum(), sequence, new_node))
-                        sequence += 1
+                        heapq.heappush(heap, (new_node.get_sum(), self.sequence, copy.deepcopy(new_node)))
+                        self.sequence += 1
                         is_leaf = False
                 # If it is a Leaf then throw into Skyline list
                 if is_leaf:
+                    print(datetime.now())
                     skyline_list.append(node)
+                # elif sys.getsizeof(heap) > 1000000:
+                #         print(len(heap), '\t\t', sys.getsizeof(heap))
+            # if sys.getsizeof(heap) > 4800000:
+            #     print(sys.getsizeof(heap), 'Before')
+            #     skyline_list.extend(self.split_heap(heap))
+            #     print(sys.getsizeof(heap), 'After')
         return skyline_list
+
+    def split_heap(self, heap):
+        new_heap = []
+        length = len(heap) * 0.3
+        while len(new_heap) < length:
+            heapq.heappush(new_heap, heapq.heappop(heap))
+        return self.extend_heap(new_heap)
 
 
 main = Main()

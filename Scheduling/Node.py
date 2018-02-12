@@ -1,10 +1,12 @@
+import copy
+
 from Scheduling.ScheduledData import ScheduledData
 
 
 class Node:
     def __init__(self, data):
         self.scheduledData = []
-        self.scheduledData.append(ScheduledData(data, data.receive))
+        self.scheduledData.append(ScheduledData(copy.copy(data), data.receive))
         self.minSchedule = self.scheduledData[0].schedule
         self.avgSchedule = self.scheduledData[0].schedule
         self.minArrive = self.scheduledData[0].arrive
