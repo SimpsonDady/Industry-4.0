@@ -9,12 +9,12 @@ class CreateChild:
         self.child()
 
     def child(self):
-        for i in range(200):
+        for i in range(800):
             list = []
-            m = random.uniform(1, 20)
-            s = random.uniform(0, 1)
-            m2 = random.uniform(1, 20)
-            s2 = random.uniform(0, 1)
+            m = random.uniform(1, 40)
+            s = random.uniform(0, 10)
+            m2 = random.uniform(1, 40)
+            s2 = random.uniform(0, 10)
             if s == 0.0:
                 s = 0.0000000000000001
             if s2 == 0.0:

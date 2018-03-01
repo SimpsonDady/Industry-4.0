@@ -18,7 +18,10 @@ class Filter:
                     less_zero.append(j)
                 else:
                     large_zero.append(j)
-            self.outdata = large_zero
+            if sum(large_zero)/len(large_zero) > sum(less_zero)/len(less_zero)*2:
+                self.outdata = large_zero
+            else:
+                self.outdata = self.data
         else:
             self.outdata = self.data
 
