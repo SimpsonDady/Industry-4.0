@@ -26,6 +26,15 @@ class LoadData:
                 self.machine_name = "STC01"
             # Split date and time
             try:
+                # print(cut[1])
+                time = cut[1].split(".")
+                if len(time) > 1:
+                    if len(time[-1]) > 5:
+                        Microsecond = cut[1].split(".")[-1]
+                        time.pop(-1)
+                        time.append('.' + Microsecond.rstrip('0'))
+                        cut[1] = ''.join(map(str, time))
+                        # print(cut[1])
                 self.time.append(datetime.strptime(cut[1], "%Y-%m-%d %H:%M:%S.%f"))
             except ValueError:
                 self.time.append(datetime.strptime(cut[1], "%Y-%m-%d %H:%M:%S"))
@@ -55,4 +64,7 @@ class LoadData:
             self.line.append(int(cut[4]))
 
             # Split knife
-            self.knife.append(int(cut[11]))
+            if cut[11] == '':
+                self.knife.append('')
+            else:
+                self.knife.append(int(cut[11]))
