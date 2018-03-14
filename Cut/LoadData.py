@@ -26,18 +26,10 @@ class LoadData:
                 self.machine_name = "STC01"
             # Split date and time
             try:
-                # print(cut[1])
-                time = cut[1].split(".")
-                if len(time) > 1:
-                    if len(time[-1]) > 5:
-                        Microsecond = cut[1].split(".")[-1]
-                        time.pop(-1)
-                        time.append('.' + Microsecond.rstrip('0'))
-                        cut[1] = ''.join(map(str, time))
-                        # print(cut[1])
-                self.time.append(datetime.strptime(cut[1], "%Y-%m-%d %H:%M:%S.%f"))
-            except ValueError:
                 self.time.append(datetime.strptime(cut[1], "%Y-%m-%d %H:%M:%S"))
+            except ValueError:
+                cut[1] = cut[1][:25]
+                self.time.append(datetime.strptime(cut[1], "%Y-%m-%d %H:%M:%S.%f"))
             # Split code
             if self.machine_name.startswith('DMG'):
                 part = cut[2].split('\\')
@@ -65,6 +57,6 @@ class LoadData:
 
             # Split knife
             if cut[11] == '':
-                self.knife.append('')
+                self.knife.append(0)
             else:
                 self.knife.append(int(cut[11]))

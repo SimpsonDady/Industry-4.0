@@ -1,10 +1,11 @@
+from datetime import datetime
+
+
 class WorkList:
     def __init__(self, file):
         self.machine_name = ''
-        self.start_date = []  # list of {'year', 'month', 'date'}
-        self.start_time = []  # list of {'hour', 'minute', 'second'}
-        self.end_date = []  # list of {'year', 'month', 'date'}
-        self.end_time = []  # list of {'hour', 'minute', 'second'}
+        self.start_time = []
+        self.end_time = []
         self.code = []  # list of main program code
         self.component = []
         self.work_num = []
@@ -30,20 +31,10 @@ class WorkList:
                     self.work_num.append(data)
                 if section == 4:
                     self.center.append(data)
-                if section == 5 or section == 6:  # Start time(5), End time(6)
-                    data_cut = data.split(' ')  # Split date, time
-                    date_cut = data_cut[0].split('-')  # Split year, month, date
-                    time_cut = data_cut[1].split(':')  # Split hour, minute, second
-                    if section == 5:  # Save start time(5)
-                        self.start_date.append(
-                            {'year': int(date_cut[0]), 'month': int(date_cut[1]), 'date': int(date_cut[2])})
-                        self.start_time.append(
-                            {'hour': int(time_cut[0]), 'minute': int(time_cut[1]), 'second': int(time_cut[2])})
-                    if section == 6:  # Save end time(6)
-                        self.end_date.append(
-                            {'year': int(date_cut[0]), 'month': int(date_cut[1]), 'date': int(date_cut[2])})
-                        self.end_time.append(
-                            {'hour': int(time_cut[0]), 'minute': int(time_cut[1]), 'second': int(time_cut[2])})
+                if section == 5:  # Save start time(5)
+                    self.start_time.append(datetime.strptime(data, "%Y-%m-%d %H:%M:%S"))
+                if section == 6:  # Save end time(6)
+                    self.end_time.append(datetime.strptime(data, "%Y-%m-%d %H:%M:%S"))
                 if section == 7:
                     self.component.append(data)
                 if section == 10:
