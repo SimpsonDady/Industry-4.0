@@ -22,9 +22,9 @@ class Format:
                 if self.plan_data[i].machine_name == data.machine_name:
                     self.match[-1] = i
             load = LoadData(data.time)
-            self.status_format.append(load.build(data.work, data.sub, data.line))
+            self.status_format.append(load.build(data.work, data.knife))
             print('     Status format: ' + data.machine_name)
-            self.execute_format.append(load.build(data.code, data.sub, data.line))
+            self.execute_format.append(load.build(data.code, data.knife))
             print('     Execute format: ' + data.machine_name)
         for data in self.plan_data:
             plan = WorkList(data.start_time, data.end_time, data.version,

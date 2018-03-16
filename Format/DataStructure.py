@@ -2,9 +2,9 @@ from datetime import datetime
 
 
 class Data:
-    def __init__(self, program, sub_program, end_time):
+    def __init__(self, program, knife, end_time):
         self.program = program
-        self.subProgram = sub_program
+        self.knife = knife
         self.component = ''
         self.version = ''
         self.worknumber = ''
@@ -25,7 +25,7 @@ class Data:
 
     def print_all(self):
         print(self.program)
-        print(self.subProgram)
+        print(self.knife)
         print(self.start)
         print(self.end)
         print()
