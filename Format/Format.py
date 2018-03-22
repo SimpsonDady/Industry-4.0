@@ -31,10 +31,10 @@ class Format:
                             data.component, data.work_num, data.nc, data.center)
             self.plan_format.append(plan.build(data.code))
             print('     Plan format: ' + data.machine_name)
-
-        for exe in self.execute_format:
-            for program in exe:
-                program.print_all()
+        #
+        # for exe in self.execute_format:
+        #     for program in exe:
+        #         program.print_all()
 
         # print(self.match)
         # for i in self.match:

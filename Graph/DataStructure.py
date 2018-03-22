@@ -1,22 +1,28 @@
 class Line:
-    def __init__(self, line, color, style, width, label):
+    def __init__(self, line, style, width):
         self.line = line
-        self.color = color
         self.style = style
         self.width = width
-        self.label = label
-
 
 class Data:
-    def __init__(self, day):
-        self.day = day
-        self.y_high = 1
-        self.y_ticks = ['Stop']
+    def __init__(self):
+        self.y_ticks = []
         self.lines = []
+        self.program = ''
+        self.allstart = 0
+        self.allend = 0
 
-    def add_line(self, line, color, style, width, label):
-        self.lines.append(Line(line, color, style, width, label))
+    def add_line(self, line, style, width):
+        self.lines.append(Line(line, style, width))
 
     def add_tick(self, tick):
-        self.y_ticks.append(tick)
-        self.y_high += 1
+        try:
+            return self.y_ticks.index(tick)+1
+        except ValueError:
+            self.y_ticks.append(tick)
+            return len(self.y_ticks)
+
+    def add_alltime(self, allstart, allend, program):
+        self.allstart = allstart
+        self.allend = allend
+        self.program = program

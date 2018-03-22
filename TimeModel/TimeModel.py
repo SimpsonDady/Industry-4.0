@@ -13,4 +13,4 @@ class Timemodel:
             print('     TimesModel: ' + machine_name[i])
         # DataBase(self.build)
 
-        statistics = Statistics(self.model)
+        # statistics = Statistics(self.model)
