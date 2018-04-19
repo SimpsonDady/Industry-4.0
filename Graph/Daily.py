@@ -17,6 +17,10 @@ class Daily:
             data = Data()
             pre_program = machine[0].program
             end = machine[0].end
+            for sort in range(0,len(machine)):
+                if machine[sort].program != pre_program:
+                    break
+                data.sort_y_tick(machine[sort].knife)
             index = data.add_tick(machine[0].knife)
             for j in range(round((machine[0].end - machine[0].start).total_seconds())):
                 data.add_line(index, '-', 0.5)
@@ -31,6 +35,10 @@ class Daily:
                     data = Data()
                     end = machine[i].end
                     pre_program = machine[i].program
+                    for sort in range(i, len(machine)):
+                        if machine[sort].program != pre_program:
+                            break
+                        data.sort_y_tick(machine[sort].knife)
                     index = data.add_tick(machine[i].knife)
                     for j in range(round((machine[i].end - machine[i].start).total_seconds())):
                         data.add_line(index, '-', 0.5)

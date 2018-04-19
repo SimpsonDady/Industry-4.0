@@ -8,7 +8,7 @@ class Timemodel:
         self.model = []
         print("****Build format into TimesModel****")
         for i in range(len(execute_format)):
-            build = Build(machine_name[i], execute_format[i], plan_format[match[i]], status_format[i])
+            build = Build(machine_name[i], execute_format[i], status_format[i])
             self.model.append(build.timemodel)
             print('     TimesModel: ' + machine_name[i])
         # DataBase(self.build)

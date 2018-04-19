@@ -1,9 +1,8 @@
 from datetime import datetime
 
 
-class Data:
-    def __init__(self, program, knife, end_time):
-        self.program = program
+class Knife:
+    def __init__(self, knife, end_time):
         self.knife = knife
         self.component = ''
         self.version = ''
@@ -24,12 +23,30 @@ class Data:
         self.center = center
 
     def print_all(self):
-        print(self.program)
         print(self.knife)
         print(self.start)
         print(self.end)
         print()
 
+
+
+class Data:
+    def __init__(self, program):
+        self.program = program
+        self.total_time = datetime.min
+        self.avg_time = datetime.min
+        self.count = 0
+        self.knife = []
+
+    def add_knife(self, knife, end_time):
+        self.knife.append(Knife(knife, end_time))
+
+    def set_start(self, time):
+        self.knife[-1].start = time
+        self.total_time = self.knife[0].end - self.knife[-1].start
+
+    def set_information(self, component, version, worknumber, nc, center):
+        self.knife[-1].set_information(component, version, worknumber, nc, center)
 
 # class Data:
 #     def __init__(self, sub_program):

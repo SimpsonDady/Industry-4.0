@@ -16,13 +16,17 @@ class Data:
         self.lines.append(Line(line, style, width))
 
     def add_tick(self, tick):
-        try:
-            return self.y_ticks.index(tick)+1
-        except ValueError:
-            self.y_ticks.append(tick)
-            return len(self.y_ticks)
+        return self.y_ticks.index(tick) + 1
 
     def add_alltime(self, allstart, allend, program):
         self.allstart = allstart
         self.allend = allend
         self.program = program
+
+    def sort_y_tick(self, y_ticks):
+        try:
+            self.y_ticks.index(y_ticks)+1
+        except ValueError:
+            self.y_ticks.append(y_ticks)
+        self.y_ticks = sorted(self.y_ticks)
+        print(self.y_ticks)
