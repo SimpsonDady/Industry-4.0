@@ -24,7 +24,7 @@ class Build:
         enddate = 0
 
         for f in range(len(self.execute_format)):
-            print(self.execute_format[f].prgram)
+            print(self.execute_format[f].program)
             filter = []
             count = {}
             for i in range(len(self.execute_format[f].knife)):
