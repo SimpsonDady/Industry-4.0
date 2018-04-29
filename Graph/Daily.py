@@ -25,8 +25,11 @@ class Daily:
                     print(machine.knife[i].start)
                     print(machine.knife[i].end)
                     index = data.add_tick(machine.knife[i].knife)
+                    for k in range(round((machine.knife[i - 1].start - machine.knife[i].end).total_seconds())):
+                        data.add_line(0, '-', 0.5)
                     for j in range(round((machine.knife[i].end - machine.knife[i].start).total_seconds())):
                         data.add_line(index, '-', 0.5)
+                    data.add_alltime(machine.knife[i].start, machine.knife[i].end, machine.program)
                 self.graph.append(data)
 
         #
